@@ -54,17 +54,42 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function PieChartComponent() {
+  const [chartDimensions, setChartDimensions] = React.useState({
+    innerRadius: 80,
+    outerRadius: 150,
+  })
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setChartDimensions({
+          innerRadius: 70,
+          outerRadius: 100,
+        })
+      } else {
+        setChartDimensions({
+          innerRadius: 80,
+          outerRadius: 150,
+        })
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize() // Set initial dimensions
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const totalPrice = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.price, 0)
   }, [])
 
   return (
     <Card className="flex flex-col bg-[#1E1E1E] text-white">
-      <CardHeader className="items-center pb-0">
+      <CardHeader className="items-center pb-2">
         <CardTitle className="text-white">My Cryptos</CardTitle>
-        
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1 pb-4">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[400px] max-w-[400px]"
@@ -78,8 +103,8 @@ export function PieChartComponent() {
               data={chartData}
               dataKey="price"
               nameKey="crypto"
-              innerRadius={80}
-              outerRadius={150}
+              innerRadius={chartDimensions.innerRadius}
+              outerRadius={chartDimensions.outerRadius}
               strokeWidth={5}
             >
               <Label
@@ -116,9 +141,6 @@ export function PieChartComponent() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm text-white">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4 text-green-400" />
-        </div>
         <div className="leading-none text-gray-400">
           Showing total value of cryptocurrencies for the last month
         </div>

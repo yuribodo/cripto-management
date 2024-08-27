@@ -4,14 +4,32 @@ import MyCoins from "./_components/Coins/MyCoins";
 import PieChart from "./_components/PieChart";
 
 export default function Home() {
+ 
+  const totalBalance = 1231321;
+  const change = 50000; 
+  const isGain = change > 0;
+  const changeColor = isGain ? "text-green-500" : "text-red-500";
+  const changeSymbol = isGain ? "+" : "-";
+
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <Header />
 
       <div className="p-6">
         <div className="flex flex-col bg-gray-800 p-6 rounded-2xl shadow-md">
-          <h1 className="text-sm text-gray-400">Total Balance</h1>
-          <h1 className="text-2xl font-bold text-white">R$: 1,231,321</h1>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-sm text-gray-400">Total Balance</h1>
+              <h1 className="text-2xl font-bold text-white">
+                R$: {totalBalance.toLocaleString()}
+              </h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={`text-2xl font-bold ${changeColor}`}>
+                {changeSymbol}{Math.abs(change).toLocaleString()}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
