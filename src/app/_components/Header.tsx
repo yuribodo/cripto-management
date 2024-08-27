@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <div className="flex justify-between items-center bg-slate-200 p-4">
+        <div className="flex justify-between items-center  bg-slate-200 p-4 rounded-xl ">
             <div className="flex ">
                 <Image
                     src="/profile.png"
