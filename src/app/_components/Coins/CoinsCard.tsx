@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function CoinsCard() {
     return (
-        <div className=" flex flex-col bg-green-50 p-6">
+        <div className=" flex flex-col bg-green-50 w-[80vw] p-6 rounded-2xl ">
             <div className="flex  justify-between">
                 <div className="flex">
                     <Image
@@ -11,7 +11,7 @@ export default function CoinsCard() {
                         height={10}
                         alt="Picture of the author"
                     />
-                    <h1>Bitcoin</h1>
+                    <h1 className=" font-semibold text-xl">Bitcoin</h1>
                 </div>
                 <div>
                     <h1 className=" p-2 font-bold">R$: 300000</h1>
