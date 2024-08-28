@@ -1,10 +1,11 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
 import Header from "./_components/Header";
 import MyCoins from "./_components/Coins/MyCoins";
 import PieChart from "./_components/PieChart";
 
 export default function Home() {
- 
   const totalBalance = 1231321;
   const change = 50000; 
   const isGain = change > 0;
@@ -20,9 +21,14 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-sm text-gray-400">Total Balance</h1>
-              <h1 className="text-2xl font-bold text-white">
+              <motion.h1 
+                className="text-2xl font-bold text-white"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
                 R$: {totalBalance.toLocaleString()}
-              </h1>
+              </motion.h1>
             </div>
             <div className="flex items-center gap-2">
               <span className={`text-2xl font-bold ${changeColor}`}>
