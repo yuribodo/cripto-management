@@ -1,20 +1,31 @@
 import Image from "next/image";
 
-export default function CoinsCard() {
+interface CoinsCardProps {
+  imageSrc: string;
+  name: string;
+  value: string;
+  onClick: () => void; // Add this line
+}
+
+export default function CoinsCard({ imageSrc, name, value, onClick }: CoinsCardProps) {
     return (
-        <div className=" flex flex-col bg-green-50 w-[80vw] p-6 rounded-2xl ">
-            <div className="flex  justify-between">
-                <div className="flex">
+        <div
+            className="flex flex-col bg-gray-800 w-[80vw] p-6 rounded-2xl text-white cursor-pointer"
+            onClick={onClick} // Add this line
+        >
+            <div className="flex justify-between">
+                <div className="flex items-center">
                     <Image
-                        src="/profile.png"
-                        width={10}
-                        height={10}
-                        alt="Picture of the author"
+                        src={imageSrc}
+                        width={40}
+                        height={40}
+                        alt="Coin image"
+                        className="mr-4"
                     />
-                    <h1 className=" font-semibold text-xl">Bitcoin</h1>
+                    <h1 className="font-semibold text-xl">{name}</h1>
                 </div>
                 <div>
-                    <h1 className=" p-2 font-bold">R$: 300000</h1>
+                    <h1 className="p-2 font-bold">R$: {value}</h1>
                 </div>
             </div>
         </div>

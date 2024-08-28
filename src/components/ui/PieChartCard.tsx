@@ -20,65 +20,91 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
+  { crypto: "Bitcoin", price: 2500, fill: "var(--color-bitcoin)" },
+  { crypto: "Ethereum", price: 1750, fill: "var(--color-ethereum)" },
+  { crypto: "Ripple", price: 255, fill: "var(--color-ripple)" },
+  { crypto: "Litecoin", price: 485, fill: "var(--color-litecoin)" },
+  { crypto: "Cardano", price: 4228, fill: "var(--color-cardano)" },
 ]
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  price: {
+    label: "Price",
   },
-  chrome: {
-    label: "Chrome",
+  bitcoin: {
+    label: "Bitcoin",
     color: "hsl(var(--chart-1))",
   },
-  safari: {
-    label: "Safari",
+  ethereum: {
+    label: "Ethereum",
     color: "hsl(var(--chart-2))",
   },
-  firefox: {
-    label: "Firefox",
+  ripple: {
+    label: "Ripple",
     color: "hsl(var(--chart-3))",
   },
-  edge: {
-    label: "Edge",
+  litecoin: {
+    label: "Litecoin",
     color: "hsl(var(--chart-4))",
   },
-  other: {
-    label: "Other",
+  cardano: {
+    label: "Cardano",
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig
 
 export function PieChartComponent() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
+  const [chartDimensions, setChartDimensions] = React.useState({
+    innerRadius: 80,
+    outerRadius: 150,
+  })
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setChartDimensions({
+          innerRadius: 70,
+          outerRadius: 100,
+        })
+      } else {
+        setChartDimensions({
+          innerRadius: 80,
+          outerRadius: 150,
+        })
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize() // Set initial dimensions
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const totalPrice = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.price, 0)
   }, [])
 
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+    <Card className="flex flex-col bg-[#1E1E1E] text-white">
+      <CardHeader className="items-center pb-2">
+        <CardTitle className="text-white">My Cryptos</CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1 pb-4">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[400px] max-w-[400px]"
         >
-          <PieChart>
+          <PieChart width={400} height={400}>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
-              innerRadius={60}
+              dataKey="price"
+              nameKey="crypto"
+              innerRadius={chartDimensions.innerRadius}
+              outerRadius={chartDimensions.outerRadius}
               strokeWidth={5}
             >
               <Label
@@ -94,16 +120,16 @@ export function PieChartComponent() {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          className="fill-white text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          ${totalPrice.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          className="fill-gray-400"
                         >
-                          Visitors
+                          Total Value
                         </tspan>
                       </text>
                     )
@@ -114,12 +140,9 @@ export function PieChartComponent() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+      <CardFooter className="flex-col gap-2 text-sm text-white">
+        <div className="leading-none text-gray-400">
+          Showing total value of cryptocurrencies for the last month
         </div>
       </CardFooter>
     </Card>

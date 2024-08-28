@@ -1,21 +1,25 @@
 import Image from "next/image";
+import { Search, Bell, Settings } from "lucide-react";
 
 export default function Header() {
-    return (
-        <div className="flex justify-between items-center  bg-slate-200 p-4 rounded-xl ">
-            <div className="flex ">
-                <Image
-                    src="/profile.png"
-                    width={10}
-                    height={10}
-                    alt="Picture of the author"
-                />
-                <p>Account</p>
-            </div>
-            
+  return (
+    <div className="flex justify-between items-center bg-slate-800 p-4 rounded-xl text-white">
+      <div className="flex items-center space-x-2">
+        <Image
+          src="/profile.png"
+          width={40}
+          height={40}
+          alt="Profile"
+          className="rounded-full"
+        />
+        <p>Account</p>
+      </div>
 
-            <h1 className="">Option 1</h1>
-            <h1>Option 2</h1>
-        </div>
-    );
+      <div className="flex items-center space-x-6">
+        <Search className="h-6 w-6 cursor-pointer" />
+        <Bell className="h-6 w-6 cursor-pointer" />
+        <Settings className="h-6 w-6 cursor-pointer" />
+      </div>
+    </div>
+  );
 }
