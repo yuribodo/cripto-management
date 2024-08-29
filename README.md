@@ -26,6 +26,7 @@ This application was conceived as a blueprint for rapid full-stack development, 
 - **TailwindCSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and more to style your websites without leaving your HTML.
 - **React-Router-Dom**: A routing library for React, enabling navigation among views.
 - **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
+- **CoinGekko**: usage of the api to get coibs prices
 
 ### Backend
 
