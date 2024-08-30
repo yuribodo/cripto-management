@@ -1,6 +1,6 @@
-# My Full-Stack Template
+# Cripto Management
 
-Welcome to the repository for my full-stack template, integrating a React front-end with a Node.js and Express back-end. This README provides a detailed explanation of the application, its components, and how to get started.
+Manage your criptos
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to the repository for my full-stack template, integrating a React front-
 
 ## Introduction
 
-This application was conceived as a blueprint for rapid full-stack development, offering the seamless integration of a dynamic React front-end and a robust, scalable Node.js back-end. This amalgamation of technologies ensures that developers can focus on building features without the usual setup overhead.
+
 
 ## Technologies Used
 
@@ -97,10 +97,10 @@ Ensure that the frontend and backend are configured to run on separate ports to 
 
 ## Conclusion
 
-This full-stack application setup is intended to accelerate the development process by providing a cohesive blend of some of the best technologies in web development today. Whether you're looking to create a small prototype or build a large-scale application, this repository provides a solid foundation. Happy coding!
+
 
 ---
 
 If you find any bugs or have a feature request, please open an issue on [GitHub](https://github.com/gabrielkrapp/full-stack-template/issues).
 
-**Made with ❤️ by [Gabriel Krapp](https://github.com/yuribodo)**.
+**Made with ❤️ by [Mario Mota](https://github.com/yuribodo)**.
