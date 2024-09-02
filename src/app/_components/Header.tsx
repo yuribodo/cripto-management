@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Search, Bell, Settings } from "lucide-react";
-import Notifications from "./Notifications"; // Importe o componente de notificações
+import Notifications from "./Notifications"; 
 
 export default function Header() {
   const [isNotificationOpen, setNotificationOpen] = useState(false);

@@ -4,14 +4,14 @@ interface CoinsCardProps {
   imageSrc: string;
   name: string;
   value: string;
-  onClick: () => void; // Add this line
+  onClick: () => void;
 }
 
 export default function CoinsCard({ imageSrc, name, value, onClick }: CoinsCardProps) {
     return (
         <div
-            className="flex flex-col bg-gray-800 w-[80vw] p-6 rounded-2xl text-white cursor-pointer"
-            onClick={onClick} // Add this line
+            className="flex flex-col bg-gray-800 w-[80vw] p-6 rounded-2xl text-white cursor-pointer relative z-10"
+            onClick={onClick}
         >
             <div className="flex justify-between">
                 <div className="flex items-center">
