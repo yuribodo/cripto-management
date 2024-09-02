@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Search, Bell, Settings } from "lucide-react";
-import Notifications from "./Notifications"; 
+import Notifications from "./Notifications";
+import SettingsModal from "./SettingsModal";
 
 export default function Header() {
   const [isNotificationOpen, setNotificationOpen] = useState(false);
+  const [isSettingsOpen, setSettingsOpen] = useState(false);
 
   const toggleNotifications = () => {
     setNotificationOpen(!isNotificationOpen);
+  };
+
+  const toggleSettings = () => {
+    setSettingsOpen(!isSettingsOpen);
   };
 
   return (
@@ -27,13 +33,16 @@ export default function Header() {
         <div className="flex items-center space-x-6">
           <Search className="h-6 w-6 cursor-pointer" />
           <Bell className="h-6 w-6 cursor-pointer" onClick={toggleNotifications} />
-          <Settings className="h-6 w-6 cursor-pointer" />
+          <Settings className="h-6 w-6 cursor-pointer" onClick={toggleSettings} />
         </div>
       </div>
 
-      {/* Modal de Notificações */}
       {isNotificationOpen && (
         <Notifications isOpen={isNotificationOpen} onClose={toggleNotifications} />
+      )}
+      
+      {isSettingsOpen && (
+        <SettingsModal isOpen={isSettingsOpen} onClose={toggleSettings} />
       )}
     </div>
   );
