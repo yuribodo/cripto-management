@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import CoinsCard from "./CoinsCard";
-import Modal from "./CoinModal"; // Certifique-se de que o nome do componente está correto
+import Modal from "./CoinModal";
 
 interface Coin {
   imageSrc: string;
@@ -15,7 +15,7 @@ const coinsData: Coin[] = [
   { imageSrc: "/bitcoin.png", name: "Bitcoin", value: "300000" },
   { imageSrc: "/ethereum.png", name: "Ethereum", value: "150000" },
   { imageSrc: "/ripple.png", name: "Ripple", value: "50000" },
-  // Adicione mais moedas conforme necessário
+ 
 ];
 
 export default function MyCoins() {
@@ -39,7 +39,6 @@ export default function MyCoins() {
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
             <CoinsCard
