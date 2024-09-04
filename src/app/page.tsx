@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Header from "./_components/Header";
+import Header from "./_components/Header/Header";
 import MyCoins from "./_components/Coins/MyCoins";
 import PieChart from "./_components/PieChart";
 
