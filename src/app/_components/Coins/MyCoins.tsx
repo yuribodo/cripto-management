@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation"; // Importa do next/navigation para o App Router
+import { useRouter } from "next/navigation"; 
 import CoinsCard from "./CoinsCard";
 import Modal from "./CoinModal";
+import axios from 'axios';
 
 interface Coin {
   imageSrc: string;
@@ -12,15 +13,32 @@ interface Coin {
   value: string;
 }
 
-const coinsData: Coin[] = [
-  { imageSrc: "/bitcoin.png", name: "Bitcoin", value: "300000" },
-  { imageSrc: "/ethereum.png", name: "Ethereum", value: "150000" },
-  { imageSrc: "/ripple.png", name: "Ripple", value: "50000" },
-];
-
 export default function MyCoins() {
+  const [coinsData, setCoinsData] = useState<Coin[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
-  const router = useRouter(); // Corrigido com o hook correto do App Router
+  const router = useRouter();
+
+  // Função para buscar dados da API customizada
+  const fetchCryptoData = async () => {
+    try {
+      const response = await axios.get('/api/crypto'); // Faz a requisição para a rota de API do Next.js
+      const data = response.data.data;
+
+      // Atualizando os dados das criptomoedas
+      setCoinsData([
+        { imageSrc: "/bitcoin.png", name: "Bitcoin", value: data.BTC.quote.USD.price.toFixed(2) },
+        { imageSrc: "/ethereum.png", name: "Ethereum", value: data.ETH.quote.USD.price.toFixed(2) },
+        { imageSrc: "/cardano.png", name: "Cardano", value: data.ADA.quote.USD.price.toFixed(2) },
+        { imageSrc: "/solana.png", name: "Solana", value: data.SOL.quote.USD.price.toFixed(2) },
+      ]);
+    } catch (error) {
+      console.error('Erro ao buscar dados de criptomoedas:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCryptoData(); // Chama a função ao montar o componente
+  }, []);
 
   const handleCardClick = (coin: Coin) => {
     setSelectedCoin(coin);
@@ -31,7 +49,7 @@ export default function MyCoins() {
   };
 
   const handleAddCoinClick = () => {
-    router.push("/add-coin"); // Redireciona para a nova página de adicionar cripto
+    router.push("/add-coin"); 
   };
 
   return (
