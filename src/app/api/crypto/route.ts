@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const response = await axios.get(url, {
       params: {
-        symbol: 'BTC,ETH,ADA,SOL', // criptomoedas desejadas
+        symbol: 'BTC,ETH,ADA,SOL', 
       },
       headers: {
         'X-CMC_PRO_API_KEY': apiKey,

@@ -11,6 +11,7 @@ interface Coin {
   imageSrc: string;
   name: string;
   value: string;
+  amount: number;
 }
 
 export default function MyCoins() {
@@ -18,18 +19,18 @@ export default function MyCoins() {
   const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
   const router = useRouter();
 
-  // Função para buscar dados da API customizada
+  
   const fetchCryptoData = async () => {
     try {
-      const response = await axios.get('/api/crypto'); // Faz a requisição para a rota de API do Next.js
+      const response = await axios.get('/api/crypto'); 
       const data = response.data.data;
 
-      // Atualizando os dados das criptomoedas
+      
       setCoinsData([
-        { imageSrc: "/bitcoin.png", name: "Bitcoin", value: data.BTC.quote.USD.price.toFixed(2) },
-        { imageSrc: "/ethereum.png", name: "Ethereum", value: data.ETH.quote.USD.price.toFixed(2) },
-        { imageSrc: "/cardano.png", name: "Cardano", value: data.ADA.quote.USD.price.toFixed(2) },
-        { imageSrc: "/solana.png", name: "Solana", value: data.SOL.quote.USD.price.toFixed(2) },
+        { imageSrc: "/bitcoin.png", name: "Bitcoin", value: data.BTC.quote.USD.price.toFixed(2), amount: 0.5  },
+        { imageSrc: "/ethereum.png", name: "Ethereum", value: data.ETH.quote.USD.price.toFixed(2), amount: 2 },
+        { imageSrc: "/cardano.png", name: "Cardano", value: data.ADA.quote.USD.price.toFixed(2), amount: 12 },
+        { imageSrc: "/solana.png", name: "Solana", value: data.SOL.quote.USD.price.toFixed(2), amount: 10 },
       ]);
     } catch (error) {
       console.error('Erro ao buscar dados de criptomoedas:', error);
@@ -37,7 +38,7 @@ export default function MyCoins() {
   };
 
   useEffect(() => {
-    fetchCryptoData(); // Chama a função ao montar o componente
+    fetchCryptoData(); 
   }, []);
 
   const handleCardClick = (coin: Coin) => {
@@ -77,6 +78,7 @@ export default function MyCoins() {
               imageSrc={coin.imageSrc}
               name={coin.name}
               value={coin.value}
+              amount={coin.amount}
               onClick={() => handleCardClick(coin)}
             />
           </motion.div>
@@ -89,6 +91,7 @@ export default function MyCoins() {
           coinName={selectedCoin.name}
           coinValue={selectedCoin.value}
           coinImage={selectedCoin.imageSrc}
+          amount={selectedCoin.amount}
         />
       )}
     </div>
