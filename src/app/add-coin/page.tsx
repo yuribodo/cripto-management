@@ -11,11 +11,7 @@ export default function AddCoin() {
 
   const handleAddCoin = () => {
     
-    console.log("Nome da Cripto:", name);
-    console.log("Valor:", value);
-    
-    
-    router.push("/my-coins"); 
+    router.push("/"); 
   };
 
   return (

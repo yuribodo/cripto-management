@@ -22,7 +22,8 @@ export default function CoinsCard({ imageSrc, name, value, onClick }: CoinsCardP
                         alt="Coin image"
                         className="mr-4"
                     />
-                    <h1 className="font-semibold text-xl">{name}</h1>
+                    <h1 className="font-semibold text-xl">{name}:</h1>
+                    <h2 className="font-semibold ml-2 text-xl">0.2</h2>
                 </div>
                 <div>
                     <h1 className="p-2 font-bold">R$: {value}</h1>
