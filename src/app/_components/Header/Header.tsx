@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Bell, Settings } from "lucide-react";
+import { Bell, Settings, Search } from "lucide-react";
 import Notifications from "./Notifications";
 import SettingsModal from "./SettingsModal";
-import SearchBar from "./SearchBar";  
 
 export default function Header() {
   const [isNotificationOpen, setNotificationOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const toggleNotifications = () => {
     setNotificationOpen(!isNotificationOpen);
@@ -17,9 +17,14 @@ export default function Header() {
     setSettingsOpen(!isSettingsOpen);
   };
 
+  const toggleSearch = () => {
+    setSearchOpen(!isSearchOpen);
+  };
+
   return (
     <div className="relative">
       <div className="flex justify-between items-center bg-slate-800 p-4 rounded-xl text-white">
+        {/* Profile Icon aligned left */}
         <div className="flex items-center space-x-2">
           <Image
             src="/profile.png"
@@ -31,17 +36,40 @@ export default function Header() {
           <p>Account</p>
         </div>
 
+        {/* Icons for notifications and settings */}
         <div className="flex items-center space-x-6">
-          <SearchBar />
+          {/* Search Icon */}
+          <Search className="h-6 w-6 cursor-pointer" onClick={toggleSearch} />
           <Bell className="h-6 w-6 cursor-pointer" onClick={toggleNotifications} />
           <Settings className="h-6 w-6 cursor-pointer" onClick={toggleSettings} />
         </div>
       </div>
 
+      {/* Search Bar overlay when clicked */}
+      {isSearchOpen && (
+        <div className="absolute inset-0 bg-slate-800 bg-opacity-95 flex items-center justify-center z-50">
+          <div className="relative w-[90%] md:w-[50%]">
+            <input
+              type="text"
+              className="w-full p-3 rounded-lg text-black"
+              placeholder="Search..."
+              autoFocus
+            />
+            <button
+              className="absolute top-2 right-3 text-black"
+              onClick={toggleSearch}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Notifications and Settings Modals */}
       {isNotificationOpen && (
         <Notifications isOpen={isNotificationOpen} onClose={toggleNotifications} />
       )}
-      
+
       {isSettingsOpen && (
         <SettingsModal isOpen={isSettingsOpen} onClose={toggleSettings} />
       )}
