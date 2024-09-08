@@ -26,7 +26,7 @@ export default function Page() {
                 className="relative bg-gray-900 text-white h-screen py-24 px-6 bg-cover bg-center" 
                 style={{ backgroundImage: `url('/background.jpg')` }}
             >
-                {/* Background Overlay */}
+                
                 <div className="absolute inset-0 bg-black opacity-60"></div>
                 
                 <div className="relative z-10 flex flex-col items-center justify-center text-center h-full max-w-4xl mx-auto">
@@ -50,7 +50,7 @@ export default function Page() {
                     </div>
                 </div>
                 
-                {/* Decorative Circles */}
+                
                 <div className="absolute top-1/4 left-0 w-56 h-56 bg-blue-500 rounded-full opacity-20 blur-xl"></div>
                 <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-blue-700 rounded-full opacity-20 blur-2xl"></div>
             </section>
