@@ -1,4 +1,4 @@
-# Cripto Management
+# Crypto Management
 
 Manage your criptos
 
@@ -14,7 +14,7 @@ Manage your criptos
 
 ## Introduction
 
-
+Welcome to Crypto Management, your one-stop solution for managing your cryptocurrency portfolio. With our platform, you can easily add the cryptocurrencies you own, track their current values, and monitor your profits or losses in real-time. Stay informed and make better financial decisions by keeping all your crypto assets organized and up to date.
 
 ## Technologies Used
 
@@ -43,27 +43,19 @@ Before you start, ensure you have `node` and `npm` installed on your machine.
 1. **Clone the repository**:
    
    ```bash
-   git clone https://github.com/gabrielkrapp/full-stack-template.git
+   git clone https://github.com/yuribodo/cripto-management.git
    ```
 
 2. **Navigate to the repository**:
 
    ```bash
-   cd full-stack-template
+   cd cripto-management
    ```
 
 3. **Install the dependencies**:
-
-   - For Frontend:
    
      ```bash
-     cd frontend && npm install
-     ```
-
-   - For Backend:
-
-     ```bash
-     cd backend && npm install
+      npm install
      ```
 
 ## Running the Application
@@ -71,7 +63,7 @@ Before you start, ensure you have `node` and `npm` installed on your machine.
 - **To run the frontend**:
 
   ```bash
-  npm run start-frontend
+    npm run dev
   ```
 
   This starts the React application on `http://localhost:5173` (or another available port).
@@ -96,10 +88,11 @@ Ensure that the frontend and backend are configured to run on separate ports to 
 
 ## Conclusion
 
+Crypto Management simplifies the process of tracking your cryptocurrency investments, providing you with real-time insights into your portfolio's performance. Whether you're monitoring gains or minimizing losses, our platform gives you the tools to stay on top of the fast-paced crypto market. Start managing your assets with confidence and take control of your financial future.
 
 
 ---
 
-If you find any bugs or have a feature request, please open an issue on [GitHub](https://github.com/gabrielkrapp/full-stack-template/issues).
+If you find any bugs or have a feature request, please open an issue on [GitHub](https://github.com/yuribodo/cripto-management/issues).
 
 **Made with ❤️ by [Mario Mota](https://github.com/yuribodo)**.
