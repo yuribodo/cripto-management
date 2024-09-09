@@ -24,18 +24,17 @@ Manage your criptos
 - **React**: A JavaScript library for building user interfaces. It allows us to create reusable UI components.
 - **TypeScript**: A superset of JavaScript, offering static type-checking and the latest ECMAScript features.
 - **TailwindCSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and more to style your websites without leaving your HTML.
-- **React-Router-Dom**: A routing library for React, enabling navigation among views.
-- **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
-- **CoinGekko**: usage of the api to get coibs prices
+- **CoinMarketCap API**: API providing real-time cryptocurrency market data, including prices, volume, and market capitalization.
+- **Next js**: React framework with server-side rendering, static generation, and optimized routing for building efficient web apps.
 
 ### Backend
 
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
 - **Express**: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - **TypeScript**: Brings static typing to JavaScript, ensuring a more predictable runtime behavior.
-- **Jest**: Used for writing unit and integration tests for the backend.
 - **PostgreSQL**: A powerful, open-source object-relational database system.
 - **Nodemon**: A utility that monitors for any changes in your source and automatically restarts your server.
+- **Prisma**: An ORM for Node.js and TypeScript, simplifying database access with an intuitive API and type safety.
 
 ## Installation
 
