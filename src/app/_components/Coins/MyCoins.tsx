@@ -17,28 +17,31 @@ interface Coin {
 export default function MyCoins() {
   const [coinsData, setCoinsData] = useState<Coin[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<Coin | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento inicializado como true
   const router = useRouter();
 
-  
   const fetchCryptoData = async () => {
     try {
-      const response = await axios.get('/api/crypto'); 
+      // Simulação de atraso para garantir que o skeleton apareça
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulação de atraso
+      const response = await axios.get('/api/crypto');
       const data = response.data.data;
 
-      
       setCoinsData([
-        { imageSrc: "/bitcoin.png", name: "Bitcoin", value: data.BTC.quote.USD.price.toFixed(2), amount: 0.5  },
+        { imageSrc: "/bitcoin.png", name: "Bitcoin", value: data.BTC.quote.USD.price.toFixed(2), amount: 0.5 },
         { imageSrc: "/ethereum.png", name: "Ethereum", value: data.ETH.quote.USD.price.toFixed(2), amount: 2 },
         { imageSrc: "/cardano.png", name: "Cardano", value: data.ADA.quote.USD.price.toFixed(2), amount: 12 },
         { imageSrc: "/solana.png", name: "Solana", value: data.SOL.quote.USD.price.toFixed(2), amount: 10 },
       ]);
     } catch (error) {
       console.error('Erro ao buscar dados de criptomoedas:', error);
+    } finally {
+      setIsLoading(false); // Atualiza o estado de carregamento
     }
   };
 
   useEffect(() => {
-    fetchCryptoData(); 
+    fetchCryptoData();
   }, []);
 
   const handleCardClick = (coin: Coin) => {
@@ -50,7 +53,7 @@ export default function MyCoins() {
   };
 
   const handleAddCoinClick = () => {
-    router.push("/add-coin"); 
+    router.push("/add-coin");
   };
 
   return (
@@ -66,23 +69,34 @@ export default function MyCoins() {
       </div>
 
       <div className="flex flex-col justify-center items-center space-y-6">
-        {coinsData.map((coin, index) => (
-          <motion.div
-            key={index}
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <CoinsCard
-              imageSrc={coin.imageSrc}
-              name={coin.name}
-              value={coin.value}
-              amount={coin.amount}
-              onClick={() => handleCardClick(coin)}
-            />
-          </motion.div>
-        ))}
+        {isLoading ? (
+          // Skeleton de carregamento
+          <div className="space-y-6 w-[90vw] sm:w-[80vw] md:w-[60vw]">
+            <div className="h-16 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div className="h-16 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div className="h-16 bg-gray-700 rounded-lg animate-pulse"></div>
+          </div>
+        ) : (
+          // Exibir Framer Motion após o carregamento
+          coinsData.map((coin, index) => (
+            <motion.div
+              key={index}
+              initial={{ x: -200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <CoinsCard
+                imageSrc={coin.imageSrc}
+                name={coin.name}
+                value={coin.value}
+                amount={coin.amount}
+                onClick={() => handleCardClick(coin)}
+                isLoading={false} // Carregamento já finalizado
+              />
+            </motion.div>
+          ))
+        )}
       </div>
       {selectedCoin && (
         <Modal
@@ -97,3 +111,4 @@ export default function MyCoins() {
     </div>
   );
 }
+

@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <div className="relative">
       <div className="flex justify-between items-center bg-slate-800 p-4 rounded-xl text-white">
-        {/* Profile Icon aligned left */}
+        
         <div className="flex items-center space-x-2">
           <Image
             src="/profile.png"
@@ -36,16 +36,16 @@ export default function Header() {
           <p>Account</p>
         </div>
 
-        {/* Icons for notifications and settings */}
+        
         <div className="flex items-center space-x-6">
-          {/* Search Icon */}
+          
           <Search className="h-6 w-6 cursor-pointer" onClick={toggleSearch} />
           <Bell className="h-6 w-6 cursor-pointer" onClick={toggleNotifications} />
           <Settings className="h-6 w-6 cursor-pointer" onClick={toggleSettings} />
         </div>
       </div>
 
-      {/* Search Bar overlay when clicked */}
+      
       {isSearchOpen && (
         <div className="absolute inset-0 bg-slate-800 bg-opacity-95 flex items-center justify-center z-50">
           <div className="relative w-[90%] md:w-[50%]">
@@ -65,7 +65,6 @@ export default function Header() {
         </div>
       )}
 
-      {/* Notifications and Settings Modals */}
       {isNotificationOpen && (
         <Notifications isOpen={isNotificationOpen} onClose={toggleNotifications} />
       )}
