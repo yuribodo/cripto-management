@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int           @id @default(autoincrement())
+  nome            String
+  email           String         @unique
+  senha           String
+  saldoTotal      Float          @default(0)
+  dataCriacao     DateTime       @default(now())
+  dataAtualizacao DateTime       @updatedAt
+  portfolio       Portfolio[]
+  transacoes      Transaction[]
+}
+
+model Crypto {
+  id              Int           @id @default(autoincrement())
+  nome            String
+  ticker          String         @unique
+  precoAtual      Float
+  dataCriacao     DateTime       @default(now())
+  dataAtualizacao DateTime       @updatedAt
+  portfolio       Portfolio[]
+  transacoes      Transaction[]
+  historicoPreco  PriceHistory[]
+}
+
+model Portfolio {
+  id              Int           @id @default(autoincrement())
+  usuarioId       Int
+  cryptoId        Int
+  quantidade      Float
+  valorCompra     Float
+  user            User           @relation(fields: [usuarioId], references: [id])
+  crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+
+  @@unique([usuarioId, cryptoId]) 
+}
+
+model Transaction {
+  id              Int           @id @default(autoincrement())
+  usuarioId       Int
+  cryptoId        Int
+  tipo            String        // Compra ou Venda
+  quantidade      Float
+  valorUnitario   Float
+  dataTransacao   DateTime       @default(now())
+  user            User           @relation(fields: [usuarioId], references: [id])
+  crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+}
+
+
+model PriceHistory {
+  id              Int           @id @default(autoincrement())
+  cryptoId        Int
+  preco           Float
+  data            DateTime
+  crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+}
