@@ -6,63 +6,72 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"  
+  url      = env("DATABASE_URL") 
 }
 
 model User {
   id              Int           @id @default(autoincrement())
   nome            String
-  email           String         @unique
+  email           String         @unique 
   senha           String
-  saldoTotal      Float          @default(0)
+  saldoTotal      Float          @default(0) 
   dataCriacao     DateTime       @default(now())
-  dataAtualizacao DateTime       @updatedAt
-  portfolio       Portfolio[]
-  transacoes      Transaction[]
+  dataAtualizacao DateTime       @updatedAt  
+  portfolio       Portfolio[]    
+  transacoes      Transaction[]  
 }
 
 model Crypto {
   id              Int           @id @default(autoincrement())
   nome            String
-  ticker          String         @unique
-  precoAtual      Float
+  ticker          String         @unique // Símbolo único para cada criptomoeda (ex: BTC, ETH)
+  precoAtual      Float          
   dataCriacao     DateTime       @default(now())
   dataAtualizacao DateTime       @updatedAt
-  portfolio       Portfolio[]
-  transacoes      Transaction[]
-  historicoPreco  PriceHistory[]
+  portfolio       Portfolio[]    
+  transacoes      Transaction[]  
+  historicoPreco  PriceHistory[] 
 }
 
 model Portfolio {
   id              Int           @id @default(autoincrement())
-  usuarioId       Int
-  cryptoId        Int
-  quantidade      Float
-  valorCompra     Float
+  usuarioId       Int           
+  cryptoId        Int           
+  quantidadeTotal Float          @default(0) 
+  precoMedio      Float          @default(0) 
   user            User           @relation(fields: [usuarioId], references: [id])
   crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+  transacoes      PortfolioTransaction[]  
 
-  @@unique([usuarioId, cryptoId]) 
+  @@unique([usuarioId, cryptoId]) // Garante que o usuário só tenha uma entrada por cripto
+}
+
+model PortfolioTransaction {
+  id          Int       @id @default(autoincrement())
+  portfolioId Int       
+  quantidade  Float     
+  valorUnitario Float   
+  dataCompra  DateTime  @default(now()) 
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
 }
 
 model Transaction {
   id              Int           @id @default(autoincrement())
-  usuarioId       Int
-  cryptoId        Int
-  tipo            String        // Compra ou Venda
-  quantidade      Float
-  valorUnitario   Float
-  dataTransacao   DateTime       @default(now())
-  user            User           @relation(fields: [usuarioId], references: [id])
-  crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+  usuarioId       Int           
+  cryptoId        Int           
+  tipo            String        // Tipo da transação: "COMPRA" ou "VENDA"
+  quantidade      Float         
+  valorUnitario   Float         
+  dataTransacao   DateTime      @default(now()) 
+  user            User          @relation(fields: [usuarioId], references: [id])
+  crypto          Crypto        @relation(fields: [cryptoId], references: [id])
 }
-
 
 model PriceHistory {
   id              Int           @id @default(autoincrement())
-  cryptoId        Int
-  preco           Float
-  data            DateTime
-  crypto          Crypto         @relation(fields: [cryptoId], references: [id])
+  cryptoId        Int           
+  preco           Float         
+  data            DateTime      
+  crypto          Crypto        @relation(fields: [cryptoId], references: [id])
 }
