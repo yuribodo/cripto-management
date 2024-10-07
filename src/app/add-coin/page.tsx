@@ -6,14 +6,18 @@ import { useRouter } from "next/navigation";
 export default function AddCoin() {
   const [selectedCoin, setSelectedCoin] = useState("");
   const [amount, setAmount] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
-  const availableCoins = ["Bitcoin", "Ethereum", "Cardano", "Solana"]; 
+  const availableCoins = ["Bitcoin", "Ethereum", "Cardano", "Solana"];
 
   const handleAddCoin = () => {
-    
     console.log(`Added ${amount} of ${selectedCoin}`);
-    router.push("/");
+    setIsModalOpen(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      router.push("/main");
+    }, 2000);
   };
 
   return (
@@ -47,6 +51,17 @@ export default function AddCoin() {
       >
         Add Coin
       </button>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h2 className="text-xl text-white mb-4">Success</h2>
+            <p className="text-white">
+              {selectedCoin} has been successfully added to your portfolio.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
