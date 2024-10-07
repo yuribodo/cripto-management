@@ -1,10 +1,14 @@
+'use client';
+
 import React, { useState } from "react";
+import Link from 'next/link';
 import Image from "next/image";
 import { Bell, Settings, Search } from "lucide-react";
 import Notifications from "./Notifications";
 import SettingsModal from "./SettingsModal";
 
 export default function Header() {
+ 
   const [isNotificationOpen, setNotificationOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -21,20 +25,25 @@ export default function Header() {
     setSearchOpen(!isSearchOpen);
   };
 
+
   return (
     <div className="relative">
       <div className="flex justify-between items-center bg-slate-800 p-4 rounded-xl text-white">
+
+
+        <Link href='/account'>
+          <div className="flex items-center space-x-2 cursor-pointer" >
+            <Image
+              src="/profile.png"
+              width={40}
+              height={40}
+              alt="Profile"
+              className="rounded-full"
+            />
+            <p>Account</p>
+          </div>
+        </Link>
         
-        <div className="flex items-center space-x-2">
-          <Image
-            src="/profile.png"
-            width={40}
-            height={40}
-            alt="Profile"
-            className="rounded-full"
-          />
-          <p>Account</p>
-        </div>
 
         
         <div className="flex items-center space-x-6">
