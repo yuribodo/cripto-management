@@ -26,6 +26,7 @@ Welcome to Crypto Management, your one-stop solution for managing your cryptocur
 - **TailwindCSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and more to style your websites without leaving your HTML.
 - **CoinMarketCap API**: API providing real-time cryptocurrency market data, including prices, volume, and market capitalization.
 - **Next js**: React framework with server-side rendering, static generation, and optimized routing for building efficient web apps.
+- **Framer motion**:
 
 ### Backend
 
