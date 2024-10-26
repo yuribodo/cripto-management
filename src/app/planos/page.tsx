@@ -115,7 +115,7 @@ const Planos: React.FC = () => {
       >
         Escolha o plano perfeito para suas necessidades de gerenciamento de criptomoedas.
       </motion.p>
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="flex max-md:flex-wrap justify-center gap-8">
         {plans.map((plan, index) => (
           <Card key={index} className="w-full max-w-md" isPopular={index === 1}>
             <div className="p-8">
